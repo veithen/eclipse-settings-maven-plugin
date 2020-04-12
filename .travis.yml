@@ -1,0 +1,21 @@
+dist: trusty
+language: java
+jdk:
+  - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
+before_install: if [ -e $JAVA_HOME/lib/security/cacerts ]; then ln -sf /etc/ssl/certs/java/cacerts $JAVA_HOME/lib/security/cacerts; fi
+install: true
+script: mvn -B -e -s .travis-settings.xml -Prelease -Dgpg.skip=true verify
+before_cache: "find $HOME/.m2 -name '*-SNAPSHOT' -a -type d -print0 | xargs -0 rm -rf"
+jobs:
+  include:
+    - if: repo = "veithen/eclipse-settings-maven-plugin" AND branch = master AND type = push
+      stage: deploy
+      script: mvn -B -e -s .travis-settings.xml -Prelease -Dgpg.skip=true -DskipTests=true deploy
+      env:
+        - secure: "ZGgJzr7Yf/s7tLeHCW48vM74eK7PDoMlG/up8UGj+nfa0iHY9hgnTEZ5RvHFa5xImcwA4UO/o9GSxiBGNoYkQxoOo/FoN7NvnbK9m7FLY128fx4sLRYzdEsgG4iLFbA+F/GXeUYqcjr7geh7qz/vV9/zJZS1RAShNR7h+x0mbNjdL94jKwyRazAeUEHBu5iVvji2rzlkaE+zukBeCV17P7weccktuAbO+JBtnF9Tb517Gl+xiZ7FGSaAxlQR0k0E3MxPDp/VeYaTIgGB7CXv00waS4Zl3mar8rjnoM5e62O7+nlecge66rUSroKfuq6OS91WoHYJAKVr1CG/PreBiqeJm/csuEa8ilfA3mMtx21u3YJy6Nfz5jM13PO6g5eXj13bC9axqOdi3malIPmmMYhv7bOGR6cpGpDMKIFVGfedFnj8NHhJIEaTIxFBSMRW0ZSCFpOFbTb4ag2Q6DV7GBaTLopDv3Aodlf48cbCyPNmuY0OqdQA/6Cbf78JgbhcjZSa8e0XLgYIXOxXfEeGqF+ikFy81zPErkkcilJjeGKLjXK3Wn8E/y44pTVB/8bPretmcCiy3cweGXU29l7kLLxHyNCVovJLdnIkKd4f+ryFeacC6bfFW3UyEoEBDBrlhnp8Ji2uHUFSWtt2pgsz0Qecv7vTO+mAOIHNgR+8rR4="
+cache:
+  directories:
+    - $HOME/.m2
