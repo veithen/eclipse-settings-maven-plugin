@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -54,7 +53,7 @@ public class ApplyMojo extends AbstractMojo {
         File settingsDir = new File(basedir, ".settings");
         settingsDir.mkdirs();
         for (Bundle bundle : bundles) {
-            File prefsFile = new File(settingsDir, bundle.getId() + ".prefs");
+            File prefsFile = new File(settingsDir, bundle.getSymbolicName() + ".prefs");
             Properties prefs = new Properties();
             if (prefsFile.exists()) {
                 try (InputStream in = new FileInputStream(prefsFile)) {
@@ -64,12 +63,12 @@ public class ApplyMojo extends AbstractMojo {
                 }
             }
             boolean updated = false;
-            for (Map.Entry<String, String> entry : bundle.getSettings().entrySet()) {
-                Object oldValue = prefs.put(entry.getKey(), entry.getValue());
-                updated |= !entry.getValue().equals(oldValue);
+            for (Property property : bundle.getProperties()) {
+                Object oldValue = prefs.put(property.getName(), property.getValue());
+                updated |= !property.getValue().equals(oldValue);
             }
             if (updated) {
-                log.info("Applying settings for bundle " + bundle.getId());
+                log.info("Applying settings for bundle " + bundle.getSymbolicName());
                 try (OutputStream out = buildContext.newFileOutputStream(prefsFile)) {
                     prefs.store(out, null);
                 } catch (IOException ex) {

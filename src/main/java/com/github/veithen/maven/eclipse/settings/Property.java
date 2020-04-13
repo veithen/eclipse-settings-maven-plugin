@@ -19,23 +19,23 @@
  */
 package com.github.veithen.maven.eclipse.settings;
 
-public class Bundle {
-    private String symbolicName;
-    private Property[] properties;
+public class Property {
+    private String name;
+    private String value;
     
-    public String getSymbolicName() {
-        return symbolicName;
+    public String getName() {
+        return name;
     }
     
-    public void setSymbolicName(String symbolicName) {
-        this.symbolicName = symbolicName;
+    public void setName(String name) {
+        this.name = name;
     }
     
-    public Property[] getProperties() {
-        return properties;
+    public String getValue() {
+        return value;
     }
     
-    public void setProperties(Property[] properties) {
-        this.properties = properties;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
