@@ -29,7 +29,7 @@
 
     <groupId>com.github.veithen.maven</groupId>
     <artifactId>eclipse-settings-maven-plugin</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <url>https://github.com/veithen/eclipse-settings-maven-plugin</url>
@@ -46,7 +46,7 @@
         <url>https://github.com/veithen/eclipse-settings-maven-plugin/tree/master</url>
         <connection>scm:git:http://github.com/veithen/eclipse-settings-maven-plugin.git</connection>
         <developerConnection>scm:git:https://github.com/veithen/eclipse-settings-maven-plugin.git</developerConnection>
-        <tag>0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
