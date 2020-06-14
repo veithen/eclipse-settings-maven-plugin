@@ -24,12 +24,12 @@
     <parent>
         <groupId>com.github.veithen</groupId>
         <artifactId>parent</artifactId>
-        <version>20-SNAPSHOT</version>
+        <version>22-SNAPSHOT</version>
     </parent>
 
     <groupId>com.github.veithen.maven</groupId>
     <artifactId>eclipse-settings-maven-plugin</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <url>https://github.com/veithen/eclipse-settings-maven-plugin</url>
