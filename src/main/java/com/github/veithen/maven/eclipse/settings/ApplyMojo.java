@@ -68,9 +68,10 @@ public class ApplyMojo extends AbstractMojo {
                 updated |= !property.getValue().equals(oldValue);
             }
             if (updated) {
+                prefs.put("eclipse.preferences.version", "1");
                 log.info("Applying settings for bundle " + bundle.getSymbolicName());
                 try (OutputStream out = buildContext.newFileOutputStream(prefsFile)) {
-                    prefs.store(out, null);
+                    Prefs.store(prefs, out);
                 } catch (IOException ex) {
                     throw new MojoFailureException(String.format("Failed to write properties to %s", prefsFile), ex);
                 }
