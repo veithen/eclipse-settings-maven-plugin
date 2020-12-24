@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,11 +44,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-@Mojo(name="dump")
+@Mojo(name = "dump")
 public class DumpMojo extends AbstractMojo {
     private static String PREFS_SUFFIX = ".prefs";
 
-    @Parameter(property="project.basedir", readonly=true)
+    @Parameter(property = "project.basedir", readonly = true)
     private File basedir;
 
     private static void appendSimpleElement(Element parent, String name, String text) {
@@ -66,7 +66,8 @@ public class DumpMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        File[] files = new File(basedir, ".settings").listFiles(f -> f.getName().endsWith(PREFS_SUFFIX));
+        File[] files =
+                new File(basedir, ".settings").listFiles(f -> f.getName().endsWith(PREFS_SUFFIX));
         if (files == null) {
             return;
         }
@@ -88,18 +89,22 @@ public class DumpMojo extends AbstractMojo {
             Element bundle = document.createElement("bundle");
             configuration.appendChild(bundle);
             String fileName = file.getName();
-            appendSimpleElement(bundle, "symbolicName", fileName.substring(0, fileName.length()-PREFS_SUFFIX.length()));
+            appendSimpleElement(
+                    bundle,
+                    "symbolicName",
+                    fileName.substring(0, fileName.length() - PREFS_SUFFIX.length()));
             Element properties = document.createElement("properties");
             bundle.appendChild(properties);
-            for (Map.Entry<Object,Object> entry : prefs.entrySet()) {
-                String name = (String)entry.getKey();
+            for (Map.Entry<Object, Object> entry : prefs.entrySet()) {
+                String name = (String) entry.getKey();
                 if (name.equals("eclipse.preferences.version")) {
                     continue;
                 }
                 Element property = document.createElement("property");
                 properties.appendChild(property);
                 appendSimpleElement(property, "name", name);
-                appendSimpleElement(property, "value", ((String)entry.getValue()).replaceAll("\\$", "\\$\\$"));
+                appendSimpleElement(
+                        property, "value", ((String) entry.getValue()).replaceAll("\\$", "\\$\\$"));
             }
         }
         try {

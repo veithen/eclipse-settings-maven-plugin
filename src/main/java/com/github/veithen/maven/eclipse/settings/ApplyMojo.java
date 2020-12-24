@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,17 +36,16 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
-@Mojo(name="apply", defaultPhase=LifecyclePhase.INITIALIZE)
+@Mojo(name = "apply", defaultPhase = LifecyclePhase.INITIALIZE)
 public class ApplyMojo extends AbstractMojo {
-    @Component
-    private BuildContext buildContext;
-    
-    @Parameter(property="project.basedir", readonly=true)
+    @Component private BuildContext buildContext;
+
+    @Parameter(property = "project.basedir", readonly = true)
     private File basedir;
-    
-    @Parameter(required=true)
+
+    @Parameter(required = true)
     private Bundle[] bundles;
-    
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Log log = getLog();
@@ -59,7 +58,8 @@ public class ApplyMojo extends AbstractMojo {
                 try (InputStream in = new FileInputStream(prefsFile)) {
                     prefs.load(in);
                 } catch (IOException ex) {
-                    throw new MojoFailureException(String.format("Failed to read properties from %s", prefsFile), ex);
+                    throw new MojoFailureException(
+                            String.format("Failed to read properties from %s", prefsFile), ex);
                 }
             }
             boolean updated = false;
@@ -73,7 +73,8 @@ public class ApplyMojo extends AbstractMojo {
                 try (OutputStream out = buildContext.newFileOutputStream(prefsFile)) {
                     Prefs.store(prefs, out);
                 } catch (IOException ex) {
-                    throw new MojoFailureException(String.format("Failed to write properties to %s", prefsFile), ex);
+                    throw new MojoFailureException(
+                            String.format("Failed to write properties to %s", prefsFile), ex);
                 }
             }
         }
