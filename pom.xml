@@ -52,7 +52,7 @@
     <properties>
         <github.repository>eclipse-settings-maven-plugin</github.repository>
         <javaVersion>1.8</javaVersion>
-        <maven.version>3.8.3</maven.version>
+        <maven.version>3.8.4</maven.version>
     </properties>
 
     <dependencies>
