@@ -2,7 +2,7 @@
  * #%L
  * Eclipse Settings Maven Plugin
  * %%
- * Copyright (C) 2020 Andreas Veithen
+ * Copyright (C) 2020 - 2023 Andreas Veithen
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
