@@ -19,7 +19,7 @@
  */
 package com.github.veithen.maven.eclipse.settings;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Properties;
