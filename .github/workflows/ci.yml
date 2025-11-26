@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ 17, 21, 23 ]
+        java: [ 21, 25 ]
     name: "Java ${{ matrix.java }}"
     runs-on: ubuntu-22.04
     steps:
@@ -63,7 +63,7 @@ jobs:
       uses: actions/setup-java@v5
       with:
         distribution: 'zulu'
-        java-version: 17
+        java-version: 21
         server-id: ossrh
         server-username: OSSRH_USERNAME
         server-password: OSSRH_PASSWORD
